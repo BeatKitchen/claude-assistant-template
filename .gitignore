@@ -1,0 +1,16 @@
+# Hugo build artifacts
+public/
+resources/
+.hugo_build.lock
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Credentials and config (keep private)
+config/*.json
+config/*.txt
+!config/.gitkeep
+
+# Node modules (if using Node)
+node_modules/
