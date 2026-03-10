@@ -25,12 +25,15 @@ Read `docs/WORKING_WITH_OWNER.md` before every session (once it exists). It defi
 ### Every Session Start
 1. **Sync the repo** before doing anything else (pull silently or transparently depending on the owner's tech level — see `docs/WORKING_WITH_OWNER.md`)
 2. **Check for unsaved changes** — if prior work wasn't captured, handle it
-3. **Ask what the owner wants to work on** — their answer drives the session
+3. **Ask what the owner wants to work on** — their answer becomes the **session label** (used in all commit messages for this session)
 4. If `docs/BUSINESS_CONTEXT.md` still has `[PLACEHOLDER]` markers, run the onboarding interview first (Phase 0 below)
 5. Check the **Phase Tracker** below for current priorities
 
+### Session Labels and Commit Messages
+The owner's answer to "what are we working on?" becomes the session label. Use it as a tag in all commits: `[ABOUT PAGE] Update bio copy`. If they don't give a clear topic, derive a short label from what they describe. This is how different sessions and parallel workstreams get attributed in git history.
+
 ### Every Session End
-1. Save all work with a clear commit message
+1. Save all work with a commit message using the session label
 2. Sync to the remote immediately
 3. Confirm that work is saved and backed up (language depends on owner's tech level)
 
@@ -236,6 +239,46 @@ When the site is ready to go live, deployment options:
 
 ---
 
+## Managing Multiple Projects
+
+The owner's work may span multiple areas. This repo is the umbrella for all of it.
+
+### Directory Structure
+
+```
+repo/
+├── website/          ← Website (if applicable)
+├── docs/             ← Business context, brand, operational docs
+├── projects/         ← Each project or engagement gets its own folder
+│   ├── example-project/
+│   │   ├── README.md       ← What this is, status, key dates
+│   │   ├── notes/          ← Meeting notes, research, strategy
+│   │   └── deliverables/   ← Finished work products
+│   └── another-project/
+├── config/           ← API keys, credentials (gitignored)
+└── CLAUDE.md         ← Auto-loaded instructions
+```
+
+### When the Owner Starts a New Project
+
+1. **Ask what to call it** — get a short, clear name
+2. **Create `projects/<project-name>/`** with a `README.md` that captures: what it is, who it's for, key dates, current status
+3. **Keep project files in that directory** — do not scatter them across the repo
+4. **Use the project name in commit messages** — e.g., `[FUNDRAISER] Draft invitation list`
+
+### Segmentation Rules
+
+- **Website work** always lives in `website/` — never in `projects/`
+- **Business-level docs** (brand, services, audit) stay in `docs/` — they apply to everything
+- **Project-specific docs** go in that project's directory
+- **Cross-project work** — commit to both locations with clear messages
+
+### When the Owner Asks to "Start Something New"
+
+They might say "I have a new client" or "I want to organize something" or "I need to plan an event." These are all new projects. Create the directory, set up the README, and ask what to tackle first. Do NOT suggest they start a separate Claude project or go to claude.ai — everything lives here under one roof.
+
+---
+
 ## Recovery Procedures
 
 When things go wrong, handle them proportionally.
@@ -262,7 +305,7 @@ When things go wrong, handle them proportionally.
 | File | Purpose | Status |
 |------|---------|--------|
 | `START_HERE.md` | This file — master routing and system instructions | Active |
-| `CLAUDE.md` | Behavioral boundaries (auto-loaded) | Active |
+| `CLAUDE.md` | Auto-loaded — session protocol, boundaries, key rules | Active |
 | `docs/BUSINESS_CONTEXT.md` | Business DNA, filled during onboarding | Pending onboarding |
 | `docs/WORKING_WITH_OWNER.md` | Communication style (created during onboarding) | Pending onboarding |
 | `docs/_guides/` | Communication style templates (used once during setup) | Reference only |
