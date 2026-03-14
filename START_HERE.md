@@ -277,6 +277,23 @@ repo/
 
 They might say "I have a new client" or "I want to organize something" or "I need to plan an event." These are all new projects. Create the directory, set up the README, and ask what to tackle first. Do NOT suggest they start a separate Claude project or go to claude.ai — everything lives here under one roof.
 
+### Inter-Claude Communication Protocol (ICCP)
+
+The owner may run multiple Claude Code sessions in parallel, each with its own session label. Sessions can pass work products to each other via git commits using this format:
+
+```
+[SOURCE SESSION → TARGET SESSION] Short description
+
+File: path/to/deliverable.md
+Instructions for the receiving session.
+```
+
+**On startup:** After syncing the repo, run `git log --oneline -20` and check for commits addressed to your session label (look for `→ YOUR LABEL`). If another session left you a delivery, acknowledge it and follow the instructions in the commit body.
+
+**To send to another session:** Commit the deliverable with the arrow format. Source label before the arrow, destination after. Use `→` (unicode arrow), not `->`.
+
+A commit tagged `[A → B]` was authored by session A, for session B to pick up. It does NOT mean session B authored it.
+
 ---
 
 ## Recovery Procedures
