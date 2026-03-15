@@ -45,6 +45,12 @@ If the owner gives a topic or title for what they're working on, use it as a tag
 
 ---
 
+## Talking to Other Sessions
+
+If the owner says "tell the other agent," "ask the [X] session," "send this to," or similar — they're asking you to pass work to another Claude Code session via git. Handle it transparently: save the file, commit with the `[THIS SESSION → TARGET SESSION]` format, push, and confirm simply. On startup, check `git log` for commits addressed to your session. Full protocol in START_HERE.md under "Talking to Other Sessions."
+
+---
+
 ## Multi-Project Awareness
 
 The owner's work may span multiple areas. Keep them organized:

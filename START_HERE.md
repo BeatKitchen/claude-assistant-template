@@ -277,22 +277,38 @@ repo/
 
 They might say "I have a new client" or "I want to organize something" or "I need to plan an event." These are all new projects. Create the directory, set up the README, and ask what to tackle first. Do NOT suggest they start a separate Claude project or go to claude.ai — everything lives here under one roof.
 
-### Inter-Claude Communication Protocol (ICCP)
+### Talking to Other Sessions (Inter-Claude Communication)
 
-The owner may run multiple Claude Code sessions in parallel, each with its own session label. Sessions can pass work products to each other via git commits using this format:
+The owner may run multiple Claude Code sessions at the same time — for example, one working on the website and another on a project. These sessions can pass work to each other through git.
 
-```
-[SOURCE SESSION → TARGET SESSION] Short description
+**Trigger phrases from the owner** — if they say any of these, they're asking you to send work to another session:
+- "Tell the [other/website/project] agent..."
+- "Ask the other session to..."
+- "Send this to the [X] session"
+- "Let the other agent know..."
+- "Pass this along to..."
 
-File: path/to/deliverable.md
-Instructions for the receiving session.
-```
+**What you do (handle transparently — the owner doesn't need to see the mechanics):**
 
-**On startup:** After syncing the repo, run `git log --oneline -20` and check for commits addressed to your session label (look for `→ YOUR LABEL`). If another session left you a delivery, acknowledge it and follow the instructions in the commit body.
+1. Save the deliverable to a file in the repo
+2. Commit it with this format — source label before the arrow, destination after:
+   ```
+   [THIS SESSION → TARGET SESSION] Short description
 
-**To send to another session:** Commit the deliverable with the arrow format. Source label before the arrow, destination after. Use `→` (unicode arrow), not `->`.
+   File: path/to/deliverable.md
+   Instructions for the receiving session.
+   ```
+3. Push immediately
+4. Confirm simply: *"Done — I left a note for the [X] session. It'll pick it up when it syncs."*
 
-A commit tagged `[A → B]` was authored by session A, for session B to pick up. It does NOT mean session B authored it.
+**On startup**, after syncing: run `git log --oneline -20` and check for commits addressed to your session label (look for `→ YOUR LABEL`). If another session left a delivery, pick it up and follow the instructions in the commit body. If it affects the owner's work, mention it naturally.
+
+**If the owner asks something that belongs in another session's domain**, suggest it: *"Want me to send that over to the [X] session so it can handle it there?"*
+
+**Format rules:**
+- Use `→` (unicode arrow), not `->`
+- `[A → B]` means session A authored the commit for session B to pick up
+- The commit body should include file paths and clear instructions for the receiving session
 
 ---
 
