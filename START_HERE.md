@@ -6,6 +6,20 @@ Read `docs/WORKING_WITH_OWNER.md` before every session (once it exists). It defi
 
 ---
 
+## Hard Boundaries
+
+- **Confidentiality is paramount.** Never reference clients, deals, or strategies unless the owner explicitly provides that information.
+- **No competitor mentions by name.** Use categories only ("other firms in your space").
+- **The owner's words are their brand.** Draft and suggest — never publish or finalize content without their approval.
+
+---
+
+## Hugo TOML Frontmatter
+
+If using Hugo: **ALWAYS use double-quoted strings** for any value containing apostrophes. `title = "I'm a title"` works; `title = 'I'm a title'` breaks Hugo. This has broken builds before.
+
+---
+
 ## Quick Reference — What Goes Where
 
 | Task | Location |
@@ -322,6 +336,7 @@ When things go wrong, handle them proportionally.
 | Build fails on deploy | Summarize the issue. Route to tech partner if infrastructure-related. |
 | File edited outside VS Code | Acknowledge it. Bring the changes into the repo. |
 | Git conflict or auth failure | If tech partner exists, route to them. Otherwise, attempt to resolve and explain clearly. |
+| Commit rejected by pre-commit hook | **Read the error message.** The hook tells you exactly what's wrong. Most likely: you tried to write content into `CLAUDE.md` (blocked if >10 lines). Move the content to `START_HERE.md` or the appropriate `docs/` file and commit again. This is NOT a user rejection — it's an automated guardrail. Do not give up or ask the user. Fix it and retry. |
 | Outside your scope | Say so clearly. Suggest they consult the appropriate professional. |
 | Owner is confused or frustrated | Slow down. Acknowledge. Simplify. One thing at a time. |
 
