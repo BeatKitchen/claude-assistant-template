@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Set Up Your Assistant</title>
+<meta name="description" content="Step-by-step setup for your Claude workspace: about 20 minutes, once per computer.">
+<style>
+:root{--bg:#faf9f6;--card:#ffffff;--ink:#1d1d1b;--mute:#66645e;--line:#e3e0d8;--accent:#2f5d50;--accent-ink:#fff;--code:#f1efe9;--done:#e7f0ec}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141413;--card:#1e1e1c;--ink:#ecebe6;--mute:#a3a097;--line:#34332f;--accent:#7fb8a4;--accent-ink:#10211b;--code:#262624;--done:#1d2b26}}
+:root[data-theme="dark"]{--bg:#141413;--card:#1e1e1c;--ink:#ecebe6;--mute:#a3a097;--line:#34332f;--accent:#7fb8a4;--accent-ink:#10211b;--code:#262624;--done:#1d2b26}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+main{max-width:720px;margin:0 auto;padding:32px 16px 64px}
+h1{font-size:1.9rem;line-height:1.2;margin:0 0 8px}
+.lede{color:var(--mute);margin:0 0 20px}
+.os{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:3px;margin:0 0 20px;background:var(--card)}
+.os button{border:0;background:none;color:var(--ink);padding:6px 16px;border-radius:999px;font:inherit;cursor:pointer}
+.os button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+.progress{height:6px;background:var(--line);border-radius:3px;overflow:hidden;margin:0 0 24px}
+.progress i{display:block;height:100%;width:0;background:var(--accent);transition:width .3s}
+ol.steps{list-style:none;margin:0;padding:0;counter-reset:s}
+.step{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 18px 14px;margin:0 0 14px;counter-increment:s}
+.step.done{background:var(--done)}
+.step h2{font-size:1.1rem;margin:0 0 6px;display:flex;gap:10px;align-items:baseline}
+.step h2::before{content:counter(s);flex:none;width:26px;height:26px;border-radius:50%;background:var(--accent);color:var(--accent-ink);font-size:.85rem;display:inline-grid;place-items:center;transform:translateY(-2px)}
+.step p,.step li{margin:6px 0}
+.step ul{padding-left:20px;margin:6px 0}
+.btn{display:inline-block;background:var(--accent);color:var(--accent-ink);text-decoration:none;padding:9px 16px;border-radius:8px;font-weight:600;margin:6px 8px 6px 0}
+.btn.ghost{background:none;color:var(--accent);border:1px solid var(--accent)}
+.cmd{display:flex;gap:8px;align-items:stretch;margin:8px 0}
+.cmd code{flex:1;min-width:0;overflow-x:auto;white-space:pre;background:var(--code);border-radius:8px;padding:10px 12px;font:14px/1.4 ui-monospace,Menlo,Consolas,monospace}
+.cmd button{flex:none;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:0 12px;cursor:pointer;font:inherit;font-size:.9rem;min-width:64px}
+label.field{display:block;margin:8px 0;font-size:.95rem}
+label.field input{display:block;width:100%;margin-top:4px;padding:9px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font:inherit}
+.check{display:flex;gap:8px;align-items:center;margin-top:10px;color:var(--mute);font-size:.95rem;cursor:pointer}
+.note{color:var(--mute);font-size:.93rem}
+[data-os="mac"] .win,[data-os="win"] .mac{display:none}
+section.after{margin-top:32px}
+section.after h2{font-size:1.2rem}
+table{width:100%;border-collapse:collapse;font-size:.95rem}
+td{border-top:1px solid var(--line);padding:8px 6px;vertical-align:top}
+td:first-child{width:42%;font-weight:600}
+kbd{background:var(--code);border-radius:4px;padding:1px 5px;font-size:.9em}
+</style>
+</head>
+<body data-os="mac">
+<main>
+<h1>Set up your Claude assistant</h1>
+<p class="lede">About 20 minutes, once per computer. Work top to bottom; tick each step as you go. Your ticks are remembered on this device.</p>
+
+<div class="os" role="group" aria-label="Your computer">
+  <button type="button" data-set="mac" aria-pressed="true">Mac</button>
+  <button type="button" data-set="win" aria-pressed="false">Windows</button>
+</div>
+<div class="progress" aria-hidden="true"><i id="bar"></i></div>
+
+<ol class="steps">
+<li class="step" data-id="github">
+  <h2>Create a GitHub account</h2>
+  <p>GitHub is where your work gets backed up. It's free. Already have one? Tick this and move on.</p>
+  <a class="btn" href="https://github.com/signup" target="_blank" rel="noopener">Create GitHub account</a>
+  <ul>
+    <li>Pick a simple username. You'll type it again in step 6.</li>
+    <li>Enter the code GitHub emails you. Choose the <b>Free</b> plan; skip the questions about teams.</li>
+    <li>When asked to turn on two-factor sign-in, do it, and keep the recovery codes somewhere safe.</li>
+  </ul>
+  <label class="check"><input type="checkbox"> Done</label>
+</li>
+
+<li class="step" data-id="claude">
+  <h2>Get a Claude plan</h2>
+  <p>The assistant needs a <b>Pro</b> plan or higher. Sign up with the email you'll use day to day.</p>
+  <a class="btn" href="https://claude.ai" target="_blank" rel="noopener">Open Claude</a>
+  <label class="check"><input type="checkbox"> Done</label>
+</li>
+
+<li class="step" data-id="vscode">
+  <h2>Install VS Code</h2>
+  <p>This is the app you'll work in.</p>
+  <a class="btn" href="https://code.visualstudio.com/download" target="_blank" rel="noopener">Download VS Code</a>
+  <p class="mac">Then open VS Code, press <kbd>Cmd</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd>, type <b>Shell Command: Install 'code' command in PATH</b>, and press Enter.</p>
+  <label class="check"><input type="checkbox"> Done</label>
+</li>
+
+<li class="step" data-id="ext">
+  <h2>Add Claude to VS Code</h2>
+  <p>With VS Code installed, this button opens it straight to the Claude Code extension. Click <b>Install</b>.</p>
+  <a class="btn" href="vscode:extension/anthropic.claude-code">Open in VS Code</a>
+  <a class="btn ghost" href="https://marketplace.visualstudio.com/items?itemName=anthropic.claude-code" target="_blank" rel="noopener">Button didn't work?</a>
+  <label class="check"><input type="checkbox"> Done</label>
+</li>
+
+<li class="step" data-id="tools">
+  <h2>Install two small tools</h2>
+  <div class="mac">
+    <p><b>Git</b> (keeps your history). Open the <b>Terminal</b> app (press <kbd>Cmd</kbd>+<kbd>Space</kbd>, type Terminal), paste this, press Enter, and click <b>Install</b> in the box that appears:</p>
+    <div class="cmd"><code>xcode-select --install</code><button type="button">Copy</button></div>
+    <p class="note">If it says it's already installed, you're set.</p>
+    <p><b>GitHub CLI</b> (signs you in to GitHub). Download the Mac installer and open it:</p>
+  </div>
+  <div class="win">
+    <p><b>Git for Windows</b>. Install it with the default options. It also gives you <b>Git Bash</b>, which you'll use below.</p>
+    <a class="btn" href="https://git-scm.com/downloads/win" target="_blank" rel="noopener">Download Git for Windows</a>
+    <p><b>GitHub CLI</b> (signs you in to GitHub). Download the Windows installer and run it:</p>
+  </div>
+  <a class="btn" href="https://cli.github.com" target="_blank" rel="noopener">Download GitHub CLI</a>
+  <label class="check"><input type="checkbox"> Done</label>
+</li>
+
+<li class="step" data-id="copy">
+  <h2>Make your own copy of the workspace</h2>
+  <p>Sign in to GitHub first. This button opens a "new repository" page with everything pre-filled.</p>
+  <a class="btn" href="https://github.com/new?template_name=claude-assistant-template&template_owner=BeatKitchen" target="_blank" rel="noopener">Make my copy</a>
+  <ul>
+    <li>Give it a short name with no spaces, like <b>my-studio</b>.</li>
+    <li>Set it to <b>Private</b>, then click <b>Create repository</b>.</li>
+  </ul>
+  <label class="field">Your GitHub username <input id="user" autocomplete="off" spellcheck="false" placeholder="e.g. jo-smith"></label>
+  <label class="field">The name you gave it <input id="repo" autocomplete="off" spellcheck="false" placeholder="e.g. my-studio"></label>
+  <p class="note">Fill these in and the commands in the next step update themselves.</p>
+  <label class="check"><input type="checkbox"> Done</label>
+</li>
+
+<li class="step" data-id="setup">
+  <h2>Download it and run setup</h2>
+  <p>In <span class="mac"><b>Terminal</b></span><span class="win"><b>Git Bash</b></span>, paste each line and press Enter, one at a time.</p>
+  <p class="note">First, sign in. Choose <b>GitHub.com</b> → <b>HTTPS</b> → <b>Yes</b> → <b>Login with a web browser</b>, then enter the code it shows you.</p>
+  <div class="cmd"><code>gh auth login</code><button type="button">Copy</button></div>
+  <div class="cmd"><code>cd ~/Documents</code><button type="button">Copy</button></div>
+  <div class="cmd"><code id="clone">gh repo clone YOUR-USERNAME/YOUR-REPO-NAME</code><button type="button">Copy</button></div>
+  <div class="cmd"><code id="cd">cd YOUR-REPO-NAME</code><button type="button">Copy</button></div>
+  <div class="cmd"><code>bash scripts/setup.sh</code><button type="button">Copy</button></div>
+  <p class="note">When setup asks about the <b>wrong-folder guard</b>, press Enter for yes. It puts a shortcut to your workspace on your Desktop.</p>
+  <label class="check"><input type="checkbox"> Done</label>
+</li>
+
+<li class="step" data-id="start">
+  <h2>Meet your assistant</h2>
+  <p>Double-click the <b>workspace shortcut on your Desktop</b>. In VS Code, click the Claude icon (top right), sign in with your Claude account, and send this:</p>
+  <div class="cmd"><code>Read START_HERE.md and begin onboarding.</code><button type="button">Copy</button></div>
+  <p>Claude will interview you for 10 to 15 minutes about you and your work, then ask what you want to build first.</p>
+  <label class="check"><input type="checkbox"> Done</label>
+</li>
+</ol>
+
+<section class="after">
+  <h2>Every time after that</h2>
+  <ul>
+    <li><b>Always open the Desktop shortcut</b>, not plain VS Code. Opened any other way, Claude can't see your files and nothing gets backed up.</li>
+    <li>Just say what you want to work on. Claude checks for unsaved work and syncs on its own.</li>
+    <li>When a box asks about <b>git push</b>, that's your backup to GitHub. Click Yes.</li>
+    <li>When you're done for the day, say <b>"save and back up."</b></li>
+  </ul>
+  <h2>If something goes wrong</h2>
+  <table>
+    <tr><td>Claude says it's in the wrong folder</td><td>Close that window and open the Desktop shortcut.</td></tr>
+    <tr><td>Claude can't reach GitHub</td><td>In your folder, run <code>bash scripts/setup.sh</code> again to sign back in.</td></tr>
+    <tr><td>"git-bash required" (Windows)</td><td>Install Git for Windows (step 5), then quit and reopen VS Code.</td></tr>
+    <tr><td>A command says "not found"</td><td>Close Terminal, open a new one, and try again. New installs show up in new windows.</td></tr>
+    <tr><td>Anything else</td><td>Describe it to Claude, or message the person who sent you this page.</td></tr>
+  </table>
+</section>
+</main>
+<script>
+(function(){
+  var store={get:function(k){try{return localStorage.getItem(k)}catch(e){return null}},set:function(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+  var body=document.body;
+  function setOS(os){body.setAttribute('data-os',os);document.querySelectorAll('.os button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.set===os)});store.set('cat-os',os)}
+  var saved=store.get('cat-os');setOS(saved||(/Win/.test(navigator.platform||navigator.userAgent)?'win':'mac'));
+  document.querySelectorAll('.os button').forEach(function(b){b.onclick=function(){setOS(b.dataset.set)}});
+  var steps=[].slice.call(document.querySelectorAll('.step'));
+  function bar(){var d=steps.filter(function(s){return s.classList.contains('done')}).length;document.getElementById('bar').style.width=(100*d/steps.length)+'%'}
+  steps.forEach(function(s){var c=s.querySelector('.check input');c.checked=store.get('cat-'+s.dataset.id)==='1';s.classList.toggle('done',c.checked);c.onchange=function(){s.classList.toggle('done',c.checked);store.set('cat-'+s.dataset.id,c.checked?'1':'0');bar()}});
+  bar();
+  var u=document.getElementById('user'),r=document.getElementById('repo');
+  function clean(v){return v.trim().replace(/\s+/g,'-').replace(/^@/,'')}
+  function fill(){var U=clean(u.value)||'YOUR-USERNAME',R=clean(r.value)||'YOUR-REPO-NAME';document.getElementById('clone').textContent='gh repo clone '+U+'/'+R;document.getElementById('cd').textContent='cd '+R;store.set('cat-user',u.value);store.set('cat-repo',r.value)}
+  u.value=store.get('cat-user')||'';r.value=store.get('cat-repo')||'';u.oninput=r.oninput=fill;fill();
+  document.querySelectorAll('.cmd button').forEach(function(b){b.onclick=function(){var t=b.previousElementSibling.textContent;function ok(){b.textContent='Copied';setTimeout(function(){b.textContent='Copy'},1500)}
+    if(navigator.clipboard){navigator.clipboard.writeText(t).then(ok,function(){sel(b.previousElementSibling)})}else sel(b.previousElementSibling)}});
+  function sel(el){var g=document.createRange();g.selectNodeContents(el);var s=getSelection();s.removeAllRanges();s.addRange(g)}
+})();
+</script>
+</body>
+</html>
